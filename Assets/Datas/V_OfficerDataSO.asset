@@ -50,7 +50,7 @@ MonoBehaviour:
     v_OfficerStatus: "\u8CB4\u65CF"
     v_OfficerSprite: {fileID: 0}
     officerRank: 3
-    meritValue: 400
+    meritValue: 200
     attackPower: 65
     defensePower: 55
   - v_officerNo: 5
@@ -58,6 +58,6 @@ MonoBehaviour:
     v_OfficerStatus: "\u8CB4\u65CF"
     v_OfficerSprite: {fileID: 0}
     officerRank: 4
-    meritValue: 800
+    meritValue: 400
     attackPower: 55
     defensePower: 65
