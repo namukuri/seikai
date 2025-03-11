@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b7fe31a21f18df428138e5ef491ddf3, type: 3}
+  m_Name: WarshipDataSO
+  m_EditorClassIdentifier: 
+  warshipDataList:
+  - warshipNo: 0
+    warshipName: 
+    warshipSprite: {fileID: 0}
+    warshipTypes: 0
+    hp: 0
+    attackPower: 0
+    attackRangeTypes: 1
+    defensePower: 0
+    mobility: 0
+  - warshipNo: 1
+    warshipName: 
+    warshipSprite: {fileID: 0}
+    warshipTypes: 1
+    hp: 0
+    attackPower: 0
+    attackRangeTypes: 2
+    defensePower: 0
+    mobility: 0
+  - warshipNo: 2
+    warshipName: 
+    warshipSprite: {fileID: 0}
+    warshipTypes: 2
+    hp: 0
+    attackPower: 0
+    attackRangeTypes: 3
+    defensePower: 0
+    mobility: 0
