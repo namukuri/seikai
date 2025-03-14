@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum OfficerRank
-{ 
+public enum OfficerRank //enum のみでスクリプトを作成する場合、using の宣言や、MonoBehaviour(モノビヘイビア) クラスの継承は不要。
+                        //どのスクリプトからでも変数の代入なしで利用可能
+{
     少尉,
     中尉,
     大尉,

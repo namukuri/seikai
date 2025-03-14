@@ -4,22 +4,22 @@ using UnityEngine;
 
 public class OfficerRankUpDater : MonoBehaviour
 {
-    // V_OfficerDataSOをInspectorからアサインできるようにする
-    public V_OfficerDataSO officerDataSO;
+    // OfficerDataSOをInspectorからアサインできるようにする
+    public VagaOfficerDataSO vagaofficerDataSO;
 
     // meritValueに応じたランクを更新するメソッド
-    public void UpdateOfficerRanks() //V_OfficerDataListのmeritValueに応じて階級を変更する
+    public void UpdateOfficerRanks() //OfficerDataListのmeritValueに応じて階級を変更する
     {
-        if (officerDataSO == null) //officerDataSOがなければ
+        if (vagaofficerDataSO == null) //officerDataSOがなければ
         {
-            Debug.LogWarning("OfficerDataSOがアサインされていません");　// Debug.LogWarningで警告つきの出力　Debug.Logでもよい？
+            Debug.LogWarning("vagaOfficerDataSOがアサインされていません");　// Debug.LogWarningで警告つきの出力　Debug.Logでもよい？
             return; //以下の処理を実行せず終了する。
         }
 
-         foreach (V_OfficerData officer in officerDataSO.v_OfficerDataList)　//foreachで全要素を処理。このうちofficerDataSOは定義されたV_OfficerDataSO型の変数であることを確認。教材のとおりfor分で書くのなら以下の通りになる
-            //for(int i = 0; i < officerDataSO.v_OfficerDataList.Cout; i++)
+         foreach (OfficerData officer in vagaofficerDataSO.vagaOfficerDataList)　//foreachで全要素を処理。このうちvagaofficerDataSOは定義されたOfficerDataSO型の変数であることを確認。教材のとおりfor分で書くのなら以下の通りになる
+            //for(int i = 0; i < vagaofficerDataSO.vagaOfficerDataList.Cout; i++)
         {
-            //V_OfficerData officer = officerDataSO.v_OfficerDataList[i];
+            //OfficerData officer = vagaofficerDataSO.vagaOfficerDataList[i];
             if (officer.meritValue >= 12800) //もしv_OfficerDataListでつくられたV_OfficerDataの変数meritValueが12800以上なら
             {
                 officer.officerRank = OfficerRank.元帥;　//v_OfficerDataListでつくられた変数officerRankをOfficerRnakで作った通りの元帥にしなさい。※以下略
