@@ -784,7 +784,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6638053675412561472, guid: 697a775c43bdf29448bb35437421330e, type: 3}
       propertyPath: m_Name
-      value: txt_OfficerDefensePower (1)
+      value: txt_OfficerDefensePower
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
