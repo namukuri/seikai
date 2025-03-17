@@ -416,6 +416,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &814501415
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 814501417}
+  - component: {fileID: 814501416}
+  m_Layer: 0
+  m_Name: OfficerRankUpDater
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &814501416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 814501415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abeeffcdba6f03a41a2219d9a6d0076a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vagaofficerDataSO: {fileID: 11400000, guid: fc4b88038ef519a4fb64808fae108ab7, type: 2}
+--- !u!4 &814501417
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 814501415}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1055.714, y: 445.6813, z: -3.4989846}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1555195481
 GameObject:
   m_ObjectHideFlags: 0
@@ -427,7 +472,7 @@ GameObject:
   - component: {fileID: 1555195482}
   - component: {fileID: 1555195483}
   m_Layer: 5
-  m_Name: OfficerPopUp
+  m_Name: PlayerPopUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -492,7 +537,7 @@ GameObject:
   - component: {fileID: 1571715442}
   - component: {fileID: 1571715441}
   m_Layer: 5
-  m_Name: OfficerMVButton
+  m_Name: btnPlayerMVUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -610,8 +655,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1831950799}
   - component: {fileID: 1831950798}
+  - component: {fileID: 1831950800}
   m_Layer: 0
-  m_Name: OfficerManager
+  m_Name: PlayerPopUpManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -645,6 +691,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1831950800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1831950797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8169aa7e3dece8498e2b10b297bc76f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vagaOfficerDataSO: {fileID: 11400000, guid: fc4b88038ef519a4fb64808fae108ab7, type: 2}
+  rankUpDater: {fileID: 814501416}
+  btnPlayerMVUp: {fileID: 1571715441}
+  txtMeritValue: {fileID: 4298535364120606292}
+  txtPlayerRank: {fileID: 8920555425151646780}
+  playerIndex: 0
 --- !u!1 &1920126174
 GameObject:
   m_ObjectHideFlags: 0
@@ -732,7 +796,7 @@ GameObject:
   - component: {fileID: 2036182951}
   - component: {fileID: 2036182950}
   m_Layer: 5
-  m_Name: ImgOfficer
+  m_Name: ImgPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -986,7 +1050,7 @@ GameObject:
   - component: {fileID: 4487494477670538301}
   - component: {fileID: 5757312362797979392}
   m_Layer: 5
-  m_Name: lblOfficerName
+  m_Name: lblPlayerName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1146,7 +1210,7 @@ GameObject:
   - component: {fileID: 682768517097807272}
   - component: {fileID: 8708118063715899029}
   m_Layer: 5
-  m_Name: lblOfficerRank
+  m_Name: lblPlayerrRank
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1164,7 +1228,7 @@ GameObject:
   - component: {fileID: 715869599093242635}
   - component: {fileID: 8669318227784478774}
   m_Layer: 5
-  m_Name: lblOfficerStatus
+  m_Name: lblPlayerStatus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1182,7 +1246,7 @@ GameObject:
   - component: {fileID: 751239678593955585}
   - component: {fileID: 8920555425151646780}
   m_Layer: 5
-  m_Name: txtOfficerRank
+  m_Name: txtPlayerRank
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1307,7 +1371,7 @@ GameObject:
   - component: {fileID: 190873507667268493}
   - component: {fileID: 8288526659738917040}
   m_Layer: 5
-  m_Name: txtOfficerName
+  m_Name: txtPlayerrName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1486,7 +1550,7 @@ GameObject:
   - component: {fileID: 7974941066020607753}
   - component: {fileID: 2237290387734060084}
   m_Layer: 5
-  m_Name: txtOfficerStatus
+  m_Name: txtPlayerStatus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1609,7 +1673,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u58EB\u5B98\u540D\n"
+  m_text: "\u4E3B\u4EBA\u516C\u540D\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0f93caf95878b97449bba5f079c7a72b, type: 2}
   m_sharedMaterial: {fileID: -4013219792648900446, guid: 0f93caf95878b97449bba5f079c7a72b, type: 2}
@@ -1695,7 +1759,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 140, y: 340}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 230, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &5831751704312011359
 RectTransform:
@@ -1714,7 +1778,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 140, y: 400}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 230, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5885008564298359182
 MonoBehaviour:
@@ -2043,7 +2107,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u4E3B\u4EBA\u516C\u540D\u306A\u3069"
+  m_text: "\u30A2\u30B9\u30BF\u30FC\u30FB\u30CE\u30F4\u30A1"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0f93caf95878b97449bba5f079c7a72b, type: 2}
   m_sharedMaterial: {fileID: -4013219792648900446, guid: 0f93caf95878b97449bba5f079c7a72b, type: 2}
@@ -2132,7 +2196,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u58EB\u5B98\u8EAB\u5206\n"
+  m_text: "\u4E3B\u4EBA\u516C\u8EAB\u5206\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0f93caf95878b97449bba5f079c7a72b, type: 2}
   m_sharedMaterial: {fileID: -4013219792648900446, guid: 0f93caf95878b97449bba5f079c7a72b, type: 2}
@@ -2221,7 +2285,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u58EB\u5B98\u968E\u7D1A"
+  m_text: "\u4E3B\u4EBA\u516C\u968E\u7D1A"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0f93caf95878b97449bba5f079c7a72b, type: 2}
   m_sharedMaterial: {fileID: -4013219792648900446, guid: 0f93caf95878b97449bba5f079c7a72b, type: 2}
@@ -2513,3 +2577,4 @@ SceneRoots:
   - {fileID: 2091075462}
   - {fileID: 552167398}
   - {fileID: 1831950799}
+  - {fileID: 814501417}
