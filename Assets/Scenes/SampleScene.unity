@@ -461,6 +461,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1392683020
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1392683022}
+  - component: {fileID: 1392683021}
+  m_Layer: 0
+  m_Name: DataBaseManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1392683021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1392683020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5d6386757f56f34395ba705a9216331, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vagaOfficerDataSO: {fileID: 11400000, guid: fc4b88038ef519a4fb64808fae108ab7, type: 2}
+--- !u!4 &1392683022
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1392683020}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1012.44275, y: 488.1408, z: -4.832389}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1555195481
 GameObject:
   m_ObjectHideFlags: 0
@@ -471,6 +516,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1555195482}
   - component: {fileID: 1555195483}
+  - component: {fileID: 1555195484}
   m_Layer: 5
   m_Name: PlayerPopUp
   m_TagString: Untagged
@@ -524,6 +570,29 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &1555195484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1555195481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8169aa7e3dece8498e2b10b297bc76f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vagaOfficerDataSO: {fileID: 11400000, guid: fc4b88038ef519a4fb64808fae108ab7, type: 2}
+  rankUpDater: {fileID: 814501416}
+  btnPlayerMVUp: {fileID: 1571715441}
+  txtMeritValue: {fileID: 4298535364120606292}
+  txtPlayerRank: {fileID: 8920555425151646780}
+  ImgPlayer: {fileID: 2036182950}
+  txtPlayerName: {fileID: 8288526659738917040}
+  txtPlayerStatus: {fileID: 2237290387734060084}
+  txtPlayerAttackPower: {fileID: 5185556567649927054}
+  txtPlayerDeffensePower: {fileID: 8826738793743963141}
+  playerIndex: 0
 --- !u!1 &1571715439
 GameObject:
   m_ObjectHideFlags: 0
@@ -645,75 +714,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1571715439}
   m_CullTransparentMesh: 1
---- !u!1 &1831950797
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1831950799}
-  - component: {fileID: 1831950798}
-  - component: {fileID: 1831950800}
-  m_Layer: 0
-  m_Name: PlayerPopUpManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1831950798
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1831950797}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: abeeffcdba6f03a41a2219d9a6d0076a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  vagaofficerDataSO: {fileID: 11400000, guid: fc4b88038ef519a4fb64808fae108ab7, type: 2}
---- !u!4 &1831950799
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1831950797}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1831950800
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1831950797}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8169aa7e3dece8498e2b10b297bc76f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  vagaOfficerDataSO: {fileID: 11400000, guid: fc4b88038ef519a4fb64808fae108ab7, type: 2}
-  rankUpDater: {fileID: 814501416}
-  btnPlayerMVUp: {fileID: 1571715441}
-  txtMeritValue: {fileID: 4298535364120606292}
-  txtPlayerRank: {fileID: 8920555425151646780}
-  ImgPlayer: {fileID: 2036182950}
-  txtPlayerName: {fileID: 8288526659738917040}
-  txtPlayerStatus: {fileID: 2237290387734060084}
-  txtPlayerAttackPower: {fileID: 5185556567649927054}
-  txtPlayerDeffensePower: {fileID: 8826738793743963141}
-  playerIndex: 0
 --- !u!1 &1920126174
 GameObject:
   m_ObjectHideFlags: 0
@@ -2581,5 +2581,5 @@ SceneRoots:
   - {fileID: 519420032}
   - {fileID: 2091075462}
   - {fileID: 552167398}
-  - {fileID: 1831950799}
   - {fileID: 814501417}
+  - {fileID: 1392683022}

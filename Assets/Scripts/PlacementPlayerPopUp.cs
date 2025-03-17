@@ -70,9 +70,9 @@ public class PlacementPlayerPopUp : MonoBehaviour
         playerOfficerData = vagaOfficerDataSO.vagaOfficerDataList[playerIndex]; //vagaOfficerDataListからplayerIndexを取得（０番目）
 
         //初期表示をセット
-        txtMeritValue.text = playerOfficerData.meritValue.ToString();　//プレイヤーの功績値の初期値をリストプレイヤーから設定。ToString型にして読めるようにする
-        txtPlayerRank.text = playerOfficerData.officerRank.ToString();　//プレイヤーの階級の初期値をリストプレイヤーから設定。ToString型は必要らしい。
-        ImgPlayer.sprite = playerOfficerData.OfficerSprite;
+        txtMeritValue.text = playerOfficerData.meritValue.ToString();　//プレイヤーの功績値の初期値をVagaOfficerDataListから設定。ToString型にして読めるようにする
+        txtPlayerRank.text = playerOfficerData.officerRank.ToString();　//プレイヤーの階級の初期値をVagaOfficerDataListから設定。ToString型は必要らしい？
+        ImgPlayer.sprite = playerOfficerData.OfficerSprite; //以下プレイヤーのパラメーターの初期値をVagaOfficerDataListから設定。
         txtPlayerName.text = playerOfficerData.OfficerName;
         txtPlayerStatus.text = playerOfficerData.OfficerStatus;
         txtPlayerAttackPower.text = playerOfficerData.attackPower.ToString();
