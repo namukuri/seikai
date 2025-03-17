@@ -23,6 +23,21 @@ public class PlacementPlayerPopUp : MonoBehaviour
     // 画面に表示する主人公階級用テキスト（TextMeshPro）
     public TMP_Text txtPlayerRank;
 
+    // 主人公のスプライトを表示するUI Image
+    public Image ImgPlayer;
+
+    // 主人公の名前を表示するテキスト
+    public TMP_Text txtPlayerName;
+
+    // 主人公のステータスを表示するテキスト
+    public TMP_Text txtPlayerStatus;
+
+    // 主人公の攻撃力を表示するテキスト
+    public TMP_Text txtPlayerAttackPower;
+
+    // 主人公の防御力を表示するテキスト
+    public TMP_Text txtPlayerDeffensePower;
+
     [Header("プレイヤーのOfficerDataリスト上のインデックス")]
     //主人公（プレイヤー）がvagaOfficerDataSO.vagaOfficerDataListの何番目に格納されているか
     public int playerIndex = 0;
@@ -57,6 +72,11 @@ public class PlacementPlayerPopUp : MonoBehaviour
         //初期表示をセット
         txtMeritValue.text = playerOfficerData.meritValue.ToString();　//プレイヤーの功績値の初期値をリストプレイヤーから設定。ToString型にして読めるようにする
         txtPlayerRank.text = playerOfficerData.officerRank.ToString();　//プレイヤーの階級の初期値をリストプレイヤーから設定。ToString型は必要らしい。
+        ImgPlayer.sprite = playerOfficerData.OfficerSprite;
+        txtPlayerName.text = playerOfficerData.OfficerName;
+        txtPlayerStatus.text = playerOfficerData.OfficerStatus;
+        txtPlayerAttackPower.text = playerOfficerData.attackPower.ToString();
+        txtPlayerDeffensePower.text = playerOfficerData.defensePower.ToString();
 
         // ボタンクリック時の処理を登録
         btnPlayerMVUp.onClick.AddListener(OnClickPlayerMVUp); //AddListenerによりOnClickPlayerMVUpメソッドが追加される

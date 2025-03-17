@@ -708,6 +708,11 @@ MonoBehaviour:
   btnPlayerMVUp: {fileID: 1571715441}
   txtMeritValue: {fileID: 4298535364120606292}
   txtPlayerRank: {fileID: 8920555425151646780}
+  ImgPlayer: {fileID: 2036182950}
+  txtPlayerName: {fileID: 8288526659738917040}
+  txtPlayerStatus: {fileID: 2237290387734060084}
+  txtPlayerAttackPower: {fileID: 5185556567649927054}
+  txtPlayerDeffensePower: {fileID: 8826738793743963141}
   playerIndex: 0
 --- !u!1 &1920126174
 GameObject:
@@ -1121,7 +1126,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u5E73\u6C11\n"
+  m_text: "\u5E73\u6C11\u306A\u3069\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0f93caf95878b97449bba5f079c7a72b, type: 2}
   m_sharedMaterial: {fileID: -4013219792648900446, guid: 0f93caf95878b97449bba5f079c7a72b, type: 2}
@@ -1576,7 +1581,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 60
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0f93caf95878b97449bba5f079c7a72b, type: 2}
   m_sharedMaterial: {fileID: -4013219792648900446, guid: 0f93caf95878b97449bba5f079c7a72b, type: 2}
@@ -2107,7 +2112,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u30A2\u30B9\u30BF\u30FC\u30FB\u30CE\u30F4\u30A1"
+  m_text: "\u30A2\u30B9\u30BF\u30FC"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0f93caf95878b97449bba5f079c7a72b, type: 2}
   m_sharedMaterial: {fileID: -4013219792648900446, guid: 0f93caf95878b97449bba5f079c7a72b, type: 2}
@@ -2393,7 +2398,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 60
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0f93caf95878b97449bba5f079c7a72b, type: 2}
   m_sharedMaterial: {fileID: -4013219792648900446, guid: 0f93caf95878b97449bba5f079c7a72b, type: 2}
