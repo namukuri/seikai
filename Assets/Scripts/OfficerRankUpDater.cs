@@ -68,8 +68,39 @@ public class OfficerRankUpDater : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        UpdateOfficerRanks();
+       // UpdateOfficerRanks();
     }
 
-    
+    /// <summary>
+    /// 戻り値のあるメソッド(voidと書いてない）retunがないとエラーになる
+    /// </summary>
+    /// <param name="meritValue"></param>
+    /// <returns></returns>
+    public OfficerRank UpdateOfficerRank(int meritValue)
+    {
+        Debug.Log("meritValu" + meritValue);
+        switch (meritValue)
+        {
+            case int value when value >= 12800:
+                return OfficerRank.元帥;
+            case int value when value >= 6400:
+                return OfficerRank.大将;
+            case int value when value >= 3200:
+                return OfficerRank.中将;
+            case int value when value >= 1600:
+                return OfficerRank.少将;
+            case int value when value >= 800:
+                return OfficerRank.大佐;
+            case int value when value >= 400:
+                return OfficerRank.中佐;
+            case int value when value >= 200:
+                return OfficerRank.少佐;
+            case int value when value >= 100:
+                return OfficerRank.大尉;
+            case int value when value >= 50:
+                return OfficerRank.中尉;
+            default:
+                return OfficerRank.少尉;
+        }
+    }
 }

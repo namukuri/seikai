@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// シングルトンパターン
+/// </summary>
 public class DataBaseManager : MonoBehaviour
 {
     public static DataBaseManager instance;

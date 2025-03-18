@@ -6,9 +6,9 @@ using UnityEngine.UI;
 
 public class PlacementPlayerPopUp : MonoBehaviour
 {
-    [Header("ScriptableObject参照")]
+   // [Header("ScriptableObject参照")]
     //プレイヤー（主人公）を含むOfficerDataのリストを保持しているScriptableObject
-    public VagaOfficerDataSO vagaOfficerDataSO;
+   // public VagaOfficerDataSO vagaOfficerDataSO;
 
     //meritValueに応じてOfficerRankを更新するためのクラス
     public OfficerRankUpDater rankUpDater;
@@ -43,12 +43,15 @@ public class PlacementPlayerPopUp : MonoBehaviour
     public int playerIndex = 0;
 
     //内部で扱う主人公のOfficerData参照
-    private OfficerData playerOfficerData;
+    [SerializeField] private OfficerData playerOfficerData;
+
+    [SerializeField]
+    private int maritValue;
 
     private void Start()
     {
         // ScriptableObject が正しくアサインされているか確認
-        if (vagaOfficerDataSO == null)
+        if (DataBaseManager.instance.vagaOfficerDataSO == null)
         {
             Debug.Log("VagaOfficerDataSOがアサインされていません。");
             return; //処理を終了する
@@ -60,14 +63,14 @@ public class PlacementPlayerPopUp : MonoBehaviour
             return; //処理を終了する
         }
         // playerIndex の範囲がリストの範囲内か確認
-        if (playerIndex < 0 || playerIndex >= vagaOfficerDataSO.vagaOfficerDataList.Count) //playerIndexが０以下もしくはリストの数値以上であれば
+        if (playerIndex < 0 || playerIndex >= DataBaseManager.instance.vagaOfficerDataSO.vagaOfficerDataList.Count) //playerIndexが０以下もしくはリストの数値以上であれば
         {
             Debug.Log("playerIndexがリストの範囲外です。");
             return; //処理を終了する
         }
 
         //主人公のOfficerDataを取得
-        playerOfficerData = vagaOfficerDataSO.vagaOfficerDataList[playerIndex]; //vagaOfficerDataListからplayerIndexを取得（０番目）
+        playerOfficerData = new OfficerData(DataBaseManager.instance.vagaOfficerDataSO.vagaOfficerDataList[playerIndex]); //OfficerDataのコンストラクタにvagaOfficerDataListからplayerIndexを取得（０番目）して渡す。
 
         //初期表示をセット
         txtMeritValue.text = playerOfficerData.meritValue.ToString();　//プレイヤーの功績値の初期値をVagaOfficerDataListから設定。ToString型にして読めるようにする
@@ -86,10 +89,12 @@ public class PlacementPlayerPopUp : MonoBehaviour
     private void OnClickPlayerMVUp()
     {
         // 主人公の功績値を50加算
-        playerOfficerData.meritValue += 50;
+        playerOfficerData.meritValue += maritValue;
 
         // 全将校のランクを再計算（OfficerRankUpDater を利用）
-        rankUpDater.UpdateOfficerRanks();
+        //rankUpDater.UpdateOfficerRanks();
+        OfficerRank newRank = rankUpDater.UpdateOfficerRank(playerOfficerData.meritValue);
+        playerOfficerData.officerRank = newRank;
 
         // 再計算後の主人公データを UI に反映
         txtMeritValue.text = playerOfficerData.meritValue.ToString();

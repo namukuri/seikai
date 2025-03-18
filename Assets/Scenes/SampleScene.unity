@@ -582,7 +582,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8169aa7e3dece8498e2b10b297bc76f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vagaOfficerDataSO: {fileID: 11400000, guid: fc4b88038ef519a4fb64808fae108ab7, type: 2}
   rankUpDater: {fileID: 814501416}
   btnPlayerMVUp: {fileID: 1571715441}
   txtMeritValue: {fileID: 4298535364120606292}
@@ -593,6 +592,16 @@ MonoBehaviour:
   txtPlayerAttackPower: {fileID: 5185556567649927054}
   txtPlayerDeffensePower: {fileID: 8826738793743963141}
   playerIndex: 0
+  playerOfficerData:
+    officerNo: 0
+    OfficerName: 
+    OfficerSprite: {fileID: 0}
+    OfficerStatus: 
+    officerRank: 0
+    meritValue: 0
+    attackPower: 0
+    defensePower: 0
+  maritValue: 50
 --- !u!1 &1571715439
 GameObject:
   m_ObjectHideFlags: 0

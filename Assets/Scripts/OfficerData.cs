@@ -15,4 +15,19 @@ public class OfficerData
     public int attackPower;
     public int defensePower;
 
+    /// <summary>
+    /// コンストラクタと呼ばれるメソッド
+    /// </summary>
+    /// <param name="officerData">vagaOfficerDataSO.vagaOfficerDataList[playerIndex]</param>
+    public OfficerData(OfficerData officerData) 
+    {
+        officerNo = officerData.officerNo;
+        OfficerName = officerData.OfficerName;
+        OfficerSprite = officerData.OfficerSprite;
+        OfficerStatus = officerData.OfficerStatus;
+        officerRank = officerData.officerRank;
+        meritValue = officerData.meritValue;
+        attackPower = officerData.attackPower;
+        defensePower = officerData.defensePower;
+    }
 }
