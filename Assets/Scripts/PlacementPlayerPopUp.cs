@@ -43,7 +43,8 @@ public class PlacementPlayerPopUp : MonoBehaviour
     public int playerIndex = 0;
 
     //内部で扱う主人公のOfficerData参照
-    [SerializeField] private OfficerData playerOfficerData;
+    [SerializeField] 
+    private OfficerData playerOfficerData;
 
     [SerializeField]
     private int maritValue;
@@ -88,7 +89,7 @@ public class PlacementPlayerPopUp : MonoBehaviour
     // 「功績値追加」ボタンが押されたときの処理
     private void OnClickPlayerMVUp()
     {
-        // 主人公の功績値を50加算
+        // 主人公の功績値をmaritValue変数分（インスペクターの情報、今回は50）加算
         playerOfficerData.meritValue += maritValue;
 
         // 全将校のランクを再計算（OfficerRankUpDater を利用）
