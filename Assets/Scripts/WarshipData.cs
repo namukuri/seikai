@@ -14,5 +14,5 @@ public class WarshipData
     public int attackPower;
     public AttackRangeTypes attackRangeTypes;
     public int defensePower;
-    public int mobility;
+    public int movePower;
 }
