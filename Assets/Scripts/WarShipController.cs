@@ -15,7 +15,7 @@ public class WarShipController : MonoBehaviour
         if (dir.sqrMagnitude > 0.01f) //（ベクトルの長さの2乗）が 0.01 よりも大きいかどうかをチェック
         {
             direction = dir.normalized;　//ベクトルの向きはそのままで大きさを 1 にする
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; //Mathf.Atan2(direction.y, direction.x) で direction の角度（ラジアン）を求め
+            float angle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg; //Mathf.Atan2(direction.y, direction.x) で direction の角度（ラジアン）を求め
                                                                                  // * Mathf.Rad2Deg でその値を度に変換 結果が、変数 angle に代入される
             transform.rotation = Quaternion.Euler(0, 0, angle); //指定した Euler 角（ここでは X:0, Y:0, Z:angle）をもとに、クォータニオン（回転情報）を生成
         }
@@ -38,5 +38,25 @@ public class WarShipController : MonoBehaviour
         float y = tilePos.y;
         return new Vector3(x, y, 0);
     }
-        
+    void Update()
+    {
+        // キーボードの上下左右の入力に応じて回転させる
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            SetDirection(Vector2.up);
+        }
+        else if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            SetDirection(Vector2.down);
+        }
+        else if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            SetDirection(Vector2.right);
+        }
+        else if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            SetDirection(Vector2.left);
+        }
+    }
+
 }
