@@ -10,6 +10,7 @@ public class DataBaseManager : MonoBehaviour
     public static DataBaseManager instance;
 
     public VagaOfficerDataSO vagaOfficerDataSO;
+    public WarshipDataSO warshipDataSO;
 
     void Awake()
     {

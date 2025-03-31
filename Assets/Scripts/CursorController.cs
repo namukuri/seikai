@@ -17,6 +17,7 @@ public class CursorController : MonoBehaviour
     // Start is called before the first frame update
     // UnitManager への参照
     public UnitManager unitManager;
+    public GameManager gameManager;
     void Start()
     {
         // Rigidbody2Dコンポーネントを取得
@@ -26,6 +27,10 @@ public class CursorController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(gameManager.currentGamePhase != GamePhase.MoveCurrsor)
+        {
+            return;
+        }
         // 左クリックを検知
         if(Input.GetMouseButtonDown(0))
         {
@@ -45,7 +50,14 @@ public class CursorController : MonoBehaviour
                 // 4. UnitManager に「このセル上に艦隊がいれば選択する」処理を呼び出す
                 if (unitManager != null)
                 {
-                    unitManager.SelectWarShipAtCell(cellPos);
+                    //カーソルを移動した地点に艦隊がいるかどうかをbool型で受け取る
+                    bool isSelectWarship = unitManager.SelectWarShipAtCell(cellPos);
+
+                    //艦隊がいた場合にはゲームフェイズを変更する。
+                    if (isSelectWarship)
+                    {
+                        gameManager.ChangeCurrentGamePhase(GamePhase.SelectingUnit);
+                    }
                 }
             }
         }

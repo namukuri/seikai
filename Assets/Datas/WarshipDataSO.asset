@@ -21,7 +21,7 @@ MonoBehaviour:
     attackPower: 0
     attackRangeTypes: 1
     defensePower: 0
-    mobility: 0
+    movePower: 4
   - warshipNo: 1
     warshipName: 
     warshipSprite: {fileID: 0}
@@ -30,7 +30,7 @@ MonoBehaviour:
     attackPower: 0
     attackRangeTypes: 2
     defensePower: 0
-    mobility: 0
+    movePower: 3
   - warshipNo: 2
     warshipName: 
     warshipSprite: {fileID: 0}
@@ -39,4 +39,4 @@ MonoBehaviour:
     attackPower: 0
     attackRangeTypes: 3
     defensePower: 0
-    mobility: 0
+    movePower: 2

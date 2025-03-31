@@ -15,7 +15,7 @@ public class UnitManager : MonoBehaviour
     /// 指定したセル座標に艦隊がいれば、その艦隊を selectWarShip に設定する
     /// </summary>
     /// <param name="cellPos">クリックなどで求めたセル座標</param>
-    public void SelectWarShipAtCell(Vector3Int cellPos)
+    public bool SelectWarShipAtCell(Vector3Int cellPos)
     {
         // いったん選択を解除
         selectWarShip = null;
@@ -31,9 +31,10 @@ public class UnitManager : MonoBehaviour
             {
                 selectWarShip = warship;
                 Debug.Log($"Warship {warship.name} を選択しました (セル座標: {cellPos})");
-                break; // 最初に見つかった艦隊だけ選択して終了
+                return true; // 最初に見つかった艦隊だけ選択して終了
             }
         }
+        return false;
     }
 
     // 必要に応じて Start / Update はそのまま
