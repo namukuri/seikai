@@ -56,6 +56,8 @@ public class WarShipController : MonoBehaviour
         float y = tilePos.y;
         return new Vector3(x, y, 0);
     }
+
+
     void Update()
     {
         // キーボードの上下左右の入力に応じて回転させる

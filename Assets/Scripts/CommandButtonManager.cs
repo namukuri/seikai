@@ -14,7 +14,12 @@ public class CommandButtonManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        // Move ボタンのクリック処理を登録
+        btnMove.onClick.AddListener(OnClickMoveBtn);
+
+        // Escape ボタンのクリック処理を登録
+        btnEscape.onClick.AddListener(OnClickEscapeBtn);
+
     }
 
     private void OnClickMoveBtn()
@@ -24,5 +29,10 @@ public class CommandButtonManager : MonoBehaviour
 
         //艦隊の移動範囲を表示する。
         
+    }
+
+    private void OnClickEscapeBtn()
+    {
+        gameManager.ChangeCurrentGamePhase(GamePhase.MoveCurrsor);
     }
 }
