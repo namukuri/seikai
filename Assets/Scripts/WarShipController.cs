@@ -5,15 +5,17 @@ using UnityEngine;
 public class WarShipController : MonoBehaviour
 {
     //public int movePower = 4; // 移動力
-    public Vector2Int currentPos; //2次元マップのマス座標の現在の位置
-    public Vector2Int tempTargetPos; // 一時的に選んだ移動先
-    public Vector2 direction; // 艦の向き
+    public Vector3Int currentPos; //2次元マップのマス座標の現在の位置
+    public Vector3Int tempTargetPos; // 一時的に選んだ移動先
+    public Vector3 direction; // 艦の向き
     public int warshipNo;
     [SerializeField]
-    private WarshipData warshipData;
+    public WarshipData warshipData;
 
-    // PathFinder への参照（インスペクターから設定するか、FindObjectOfTypeで取得）
+    // PathFinder への参照（インスペクターで設定）
     public PathFinder pathFinder;
+    // 経路のハイライト表示を行う MapManager への参照
+    public MapManager mapManager;
 
     void Start()
     {
@@ -30,6 +32,42 @@ public class WarShipController : MonoBehaviour
         }
     }
 
+    // ユーザ入力やコマンドで tempTargetPos を更新した後に呼び出す経路計算メソッド
+    public void OnTargetTileSelected(Vector3Int targetTile)
+    {
+        tempTargetPos = targetTile;
+        // BFSを用いて経路を計算する。warshipData.movePower を上限とする
+        List<Vector3Int> route = CalculateRoute();
+        if (route == null)
+        {
+            Debug.Log("目標タイル " + tempTargetPos + " は移動可能範囲外です");
+        }
+        else
+        {
+            Debug.Log("経路が見つかりました: " + string.Join(" -> ", route));
+            // 経路をハイライト表示
+            mapManager.ShowRoute(route);
+        }
+    }
+
+    // BFSで経路を計算する
+    public List<Vector3Int> CalculateRoute()
+    {
+        if (warshipData == null)
+        {
+            Debug.LogError("WarShipDataが設定されていません");
+            return null;
+        }
+        if (pathFinder == null)
+        {
+            Debug.LogError("PathFinderが参照されていません");
+            return null;
+        }
+        // warshipData.movePower を上限として経路を取得
+        List<Vector3Int> route = pathFinder.FindPath(currentPos, tempTargetPos, warshipData.movePower);
+        return route;
+    }
+
     // 方向を決める
     public void SetDirection(Vector2 dir)
     {
@@ -44,7 +82,7 @@ public class WarShipController : MonoBehaviour
     }
 
     // 実際に移動する処理
-    public void MoveTo(Vector2Int tilePos)
+    public void MoveTo(Vector3Int tilePos)
     {
         currentPos = tilePos; //新しいタイルの座標を現在の位置に反映
         // タイル座標をワールド座標に変換して移動
@@ -52,40 +90,13 @@ public class WarShipController : MonoBehaviour
         transform.position = worldPos;
     }
 
-    private Vector3 ConvertTileToWorldPos(Vector2Int tilePos) //タイル座標をワールド座標に変換する処理を行うメソッド
+    private Vector3 ConvertTileToWorldPos(Vector3Int tilePos) //タイル座標をワールド座標に変換する処理を行うメソッド
     {
         // タイルサイズなどを考慮してワールド座標を算出
         float x = tilePos.x;
         float y = tilePos.y;
         return new Vector3(x, y, 0);
     }
-
-    // BFSを使って、現在位置から tempTargetPos までの経路を計算する処理
-    public List<Vector2Int> CalculateRoute()
-    {
-        if (warshipData == null)
-        {
-            Debug.LogError("WarShipDataが設定せれていません");
-            return null;
-        }
-        if (pathFinder == null)
-        {
-            Debug.LogError("PathFinderが参照されていません");
-            return null;
-        }
-        // WarShipData.movePower を上限とする
-        List<Vector2Int> route = pathFinder.FindPath(currentPos, tempTargetPos, warshipData.movePower);
-        if (route == null)
-        {
-            Debug.Log("目標タイル" + tempTargetPos + "は移動範囲外です");
-        }
-        else
-        {
-            Debug.Log("経路が見つかりました: " + string.Join(" -> ", route));
-        }
-        return route;
-    }
-
 
         void Update()
     {
@@ -107,5 +118,9 @@ public class WarShipController : MonoBehaviour
             SetDirection(Vector2.left);
         }
     }
-
+    
+    public Vector3Int GetWarshipPos()
+    {
+        return mapManager.tilemap.WorldToCell(transform.position);
+    }
 }
