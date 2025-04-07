@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class WarShipController : MonoBehaviour
 {
-    public int movePower = 4; // 移動力
+    //public int movePower = 4; // 移動力
     public Vector2Int currentPos; //2次元マップのマス座標の現在の位置
     public Vector2Int tempTargetPos; // 一時的に選んだ移動先
     public Vector2 direction; // 艦の向き
     public int warshipNo;
     [SerializeField]
     private WarshipData warshipData;
+
+    // PathFinder への参照（インスペクターから設定するか、FindObjectOfTypeで取得）
+    public PathFinder pathFinder;
 
     void Start()
     {
@@ -57,8 +60,34 @@ public class WarShipController : MonoBehaviour
         return new Vector3(x, y, 0);
     }
 
+    // BFSを使って、現在位置から tempTargetPos までの経路を計算する処理
+    public List<Vector2Int> CalculateRoute()
+    {
+        if (warshipData == null)
+        {
+            Debug.LogError("WarShipDataが設定せれていません");
+            return null;
+        }
+        if (pathFinder == null)
+        {
+            Debug.LogError("PathFinderが参照されていません");
+            return null;
+        }
+        // WarShipData.movePower を上限とする
+        List<Vector2Int> route = pathFinder.FindPath(currentPos, tempTargetPos, warshipData.movePower);
+        if (route == null)
+        {
+            Debug.Log("目標タイル" + tempTargetPos + "は移動範囲外です");
+        }
+        else
+        {
+            Debug.Log("経路が見つかりました: " + string.Join(" -> ", route));
+        }
+        return route;
+    }
 
-    void Update()
+
+        void Update()
     {
         // キーボードの上下左右の入力に応じて回転させる
         if (Input.GetKeyDown(KeyCode.UpArrow))
