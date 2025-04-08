@@ -49,12 +49,17 @@ public class CommandButtonManager : MonoBehaviour
 
         //ゲームフェイズをShowingMoveRangeに切り替える
         gameManager.ChangeCurrentGamePhase(GamePhase.ShowingMoveRange);
-                       
+
+        // ボタンを消したいので、選択中の艦を null にしておく
+        unitManager.selectWarShip = null;
+
     }
 
     private void OnClickEscapeBtn()
     {
         gameManager.ChangeCurrentGamePhase(GamePhase.MoveCurrsor);
+        // ボタンを消したいので、選択中の艦を null にしておく
+        unitManager.selectWarShip = null;
     }
 
 
