@@ -89,7 +89,7 @@ public class PathFinder : MonoBehaviour
          return path;
        }
     
-    public List<Vector3Int> CalculateMoveRange(Vector3Int startPosition, int maxMoveRange)
+    public List<Vector3Int> CalculateRoute(Vector3Int startPosition, int maxMoveRange)
     {
         Debug.Log(startPosition);
         List<Vector3Int> moveRange = new List<Vector3Int>();

@@ -277,6 +277,7 @@ MonoBehaviour:
   unitManager: {fileID: 446168935}
   mapManager: {fileID: 1698208028}
   pathFinder: {fileID: 1190464419}
+  placementCommandPopUp: {fileID: 1004683551}
 --- !u!4 &99586578
 Transform:
   m_ObjectHideFlags: 0

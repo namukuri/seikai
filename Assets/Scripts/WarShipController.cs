@@ -85,9 +85,9 @@ public class WarShipController : MonoBehaviour
     public void MoveTo(Vector3Int tilePos)
     {
         currentPos = tilePos; //新しいタイルの座標を現在の位置に反映
-        // タイル座標をワールド座標に変換して移動
-        Vector3 worldPos = ConvertTileToWorldPos(tilePos);
-        transform.position = worldPos;
+        // タイルの中心のワールド座標を取得し、そこへ移動
+        Vector3 centerPos = mapManager.tilemap.GetCellCenterWorld(tilePos);
+        transform.position = centerPos;
     }
 
     private Vector3 ConvertTileToWorldPos(Vector3Int tilePos) //タイル座標をワールド座標に変換する処理を行うメソッド

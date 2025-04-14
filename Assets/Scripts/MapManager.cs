@@ -40,6 +40,14 @@ public class MapManager : MonoBehaviour
     }
 
     /// <summary>
+    /// 指定したセル座標がハイライトされているかどうか
+    /// </summary>
+    public bool IsCellHiglighted(Vector3Int cellPos)
+    {
+        return highlightedCells.Contains(cellPos);
+    }
+
+    /// <summary>
     /// 以前にハイライトしたセルの色をリセット（デフォルトは白）する
     /// </summary>
     public void HideRoute()

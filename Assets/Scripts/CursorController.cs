@@ -27,33 +27,26 @@ public class CursorController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(gameManager.currentGamePhase != GamePhase.MoveCurrsor)
-        {
-            return;
-        }
-        // 左クリックを検知
-        if(Input.GetMouseButtonDown(0))
-        {
-            //  1.クリックされたスクリーン座標をワールド座標に変換
-            Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            mouseWorldPos.z = 0f; //2DなのでZは0にそろえる
+        // 常にカーソルの位置を更新する
+        Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mouseWorldPos.z = 0f;
+        Vector3Int cellPos = tilemap.WorldToCell(mouseWorldPos);
+        transform.position = tilemap.GetCellCenterWorld(cellPos);
 
-            // 2.ワールド座標をタイルマップのセル座標に変換
-            Vector3Int cellPos = tilemap.WorldToCell(mouseWorldPos);
-            if (tilemap.HasTile(cellPos))
-            {
-                // 3. セル座標から、そのセルの中心のワールド座標を取得
-                Vector3 targetPosition = tilemap.GetCellCenterWorld(cellPos);
+        // 現在のゲームフェイズをログ出力しておく
+        Debug.Log("CurrentGamePhase: " + gameManager.currentGamePhase);
+        Debug.Log("Selected WarShip: " + unitManager.selectWarShip);
 
-                // 瞬間移動
-                transform.position = targetPosition;
-                // 4. UnitManager に「このセル上に艦隊がいれば選択する」処理を呼び出す
-                if (unitManager != null)
+
+        // フェイズに応じたクリック処理の分岐
+        if (gameManager.currentGamePhase == GamePhase.MoveCurrsor)
+        {
+            // ユニット選択中の処理（例: マウスクリックで戦艦選択）
+            if (Input.GetMouseButtonDown(0))
+            {                            
+                if (tilemap.HasTile(cellPos))
                 {
-                    //カーソルを移動した地点に艦隊がいるかどうかをbool型で受け取る
                     bool isSelectWarship = unitManager.SelectWarShipAtCell(cellPos);
-
-                    //艦隊がいた場合にはゲームフェイズを変更する。
                     if (isSelectWarship)
                     {
                         gameManager.ChangeCurrentGamePhase(GamePhase.SelectingUnit);
@@ -61,24 +54,46 @@ public class CursorController : MonoBehaviour
                 }
             }
         }
-            // InputManager の Horizontal に登録してあるキーが入力されたら、水平(横)方向の入力値として代入
-            //horizontal = Input.GetAxis("Horizontal");
-            // InputManager の Vertical に登録してあるキーが入力されたら、水平(横)方向の入力値として代入
-            //vertical = Input.GetAxis("Vertical");
-        }
-    //private void FixedUpdate()
-    //{
-    // 移動
-    //Move();
-    //}
-    /// <summary>
-    /// 移動
-    /// </summary>
-    //private void Move()
-    //{
-    // 斜め移動の距離が増えないように正規化処理を行い、単位ベクトルとする(方向の情報は持ちつつ、距離による速度差をなくして一定値にする)
-    //Vector3 dir = new Vector3(horizontal, vertical, 0).normalized;
-    // velocity(速度)に新しい値を代入して、ゲームオブジェクトを移動させる
-    //rb.velocity = dir * moveSpeed;
+        // 移動可能範囲表示中のフェイズ（ShowingMoveRange）の間、ユーザーがクリックしたら…
+        else if (gameManager.currentGamePhase == GamePhase.ShowingMoveRange)
+        {
+            // 移動先を選択するフェイズ
+            if (Input.GetMouseButtonDown(0))
+            {
+                // クリックされたセルがタイルとして存在しているか確認
+                if (tilemap.HasTile(cellPos)) 
+                {
+                    if(unitManager != null && unitManager.selectWarShip != null)
+                    {
+                        if(unitManager.selectWarShip.mapManager.IsCellHiglighted(cellPos)) 
+                        {
+                            // ここで MapManager 側でハイライト済みセルを判定するメソッド IsCellHighlighted() が正しく実装されている前提
+                            if (unitManager.selectWarShip.mapManager.IsCellHiglighted(cellPos))
+                            {
+                                // フェイズを SelectingMoveTile に変更
+                                gameManager.ChangeCurrentGamePhase(GamePhase.SelectingMoveTile);
 
+                                // 移動先として処理する
+                                var warship = unitManager.selectWarShip;
+                                warship.MoveTo(cellPos);
+                                warship.mapManager.HideRoute();
+
+                                // 次のフェイズへ、またはフェイズを戻す
+                                gameManager.ChangeCurrentGamePhase(GamePhase.MoveCurrsor);
+                            }
+                        }                                                
+                           
+                        else
+                        {
+                            Debug.Log("このセルは移動可能範囲外です");
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
+
+
+
+                           

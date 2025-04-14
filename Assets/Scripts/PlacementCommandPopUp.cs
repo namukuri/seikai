@@ -13,6 +13,8 @@ public class PlacementCommandPopUp : MonoBehaviour
     [SerializeField]
     private UnitManager unitManager;
 
+    private bool hideCommandButtons = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,14 +26,30 @@ public class PlacementCommandPopUp : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // UnitManager が保持している選択中の WarShip が null でなければ表示、null なら非表示
-        if (unitManager != null && unitManager.selectWarShip != null)
+        if (!hideCommandButtons)
         {
-            commandButtonsCanvasGroup.alpha = 1f;
+            // UnitManager が保持している選択中の WarShip が null でなければ表示、null なら非表示
+            if (unitManager != null && unitManager.selectWarShip != null)
+            {
+                commandButtonsCanvasGroup.alpha = 1f;
+            }
+            else
+            {
+                commandButtonsCanvasGroup.alpha = 0f;
+            }
         }
         else
         {
+            // hideCommandButtons が true の場合は常に非表示にする
             commandButtonsCanvasGroup.alpha = 0f;
         }
+    }
+    /// <summary>
+    /// 外部から呼び出して、移動ボタン等を非表示にする
+    /// </summary>
+    public void HideCommandButtons()
+    {
+        hideCommandButtons = true;
+        commandButtonsCanvasGroup.alpha -= 0f;
     }
 }

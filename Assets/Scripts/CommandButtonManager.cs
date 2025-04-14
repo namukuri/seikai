@@ -12,6 +12,8 @@ public class CommandButtonManager : MonoBehaviour
     public UnitManager unitManager;    // UnitManager 参照
     public MapManager mapManager;      // MapManager 参照
     public PathFinder pathFinder;      // BFSなどの経路探索用
+    public PlacementCommandPopUp placementCommandPopUp;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +27,7 @@ public class CommandButtonManager : MonoBehaviour
 
     private void OnClickMoveBtn()
     {
-        Debug.Log("MoveButton");
+        Debug.Log("MoveButton clicked");
         // 現在選択中の WarShip を取得
         var warship = unitManager.selectWarShip;
         if (warship == null)
@@ -38,7 +40,7 @@ public class CommandButtonManager : MonoBehaviour
         //warship.OnTargetTileSelected
         // 移動可能範囲を BFS などで計算
         //   ここでは「warship.currentPos から warship.warshipData.movePower タイル分」
-        List<Vector3Int> moveRange = pathFinder.CalculateMoveRange
+        List<Vector3Int> moveRange = pathFinder.CalculateRoute
             ( 
             startPos,
             warship.warshipData.movePower
@@ -47,11 +49,13 @@ public class CommandButtonManager : MonoBehaviour
         // タイルマップ上で移動可能範囲をハイライト
         mapManager.ShowRoute(moveRange);
 
+        placementCommandPopUp.HideCommandButtons();
+
         //ゲームフェイズをShowingMoveRangeに切り替える
         gameManager.ChangeCurrentGamePhase(GamePhase.ShowingMoveRange);
 
         // ボタンを消したいので、選択中の艦を null にしておく
-        unitManager.selectWarShip = null;
+        //unitManager.selectWarShip = null;
 
     }
 
