@@ -3634,6 +3634,7 @@ MonoBehaviour:
     movePower: 0
   pathFinder: {fileID: 1190464419}
   mapManager: {fileID: 1698208028}
+  isMoveEnd: 0
 --- !u!1 &348406945
 GameObject:
   m_ObjectHideFlags: 0
@@ -5171,6 +5172,8 @@ MonoBehaviour:
   tilemap: {fileID: 112099439}
   unitManager: {fileID: 446168935}
   gameManager: {fileID: 1394581460}
+  placementcommandPopUp: {fileID: 1004683551}
+  commandbuttonManager: {fileID: 99586577}
 --- !u!50 &1958546510
 Rigidbody2D:
   serializedVersion: 4

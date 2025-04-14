@@ -49,7 +49,7 @@ public class CommandButtonManager : MonoBehaviour
         // タイルマップ上で移動可能範囲をハイライト
         mapManager.ShowRoute(moveRange);
 
-        placementCommandPopUp.HideCommandButtons();
+        placementCommandPopUp.HideCommandButtons(); 
 
         //ゲームフェイズをShowingMoveRangeに切り替える
         gameManager.ChangeCurrentGamePhase(GamePhase.ShowingMoveRange);
@@ -66,5 +66,12 @@ public class CommandButtonManager : MonoBehaviour
         unitManager.selectWarShip = null;
     }
 
-
+    public void ShowMoveBtn()
+    {
+        btnMove.interactable = true;
+    }
+    public void HideMoveBtn()
+    {
+        btnMove.interactable = false;
+    }
 }

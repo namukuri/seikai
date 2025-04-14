@@ -16,9 +16,11 @@ public class WarShipController : MonoBehaviour
     public PathFinder pathFinder;
     // 経路のハイライト表示を行う MapManager への参照
     public MapManager mapManager;
+    public bool isMoveEnd;
 
     void Start()
     {
+        isMoveEnd = false;
         // DataBaseManager から指定した warshipNo に合致する WarshipData を取得
         warshipData = DataBaseManager.instance.warshipDataSO.warshipDataList.Find(data => data.warshipNo == warshipNo);
         if (warshipData == null)
@@ -88,6 +90,7 @@ public class WarShipController : MonoBehaviour
         // タイルの中心のワールド座標を取得し、そこへ移動
         Vector3 centerPos = mapManager.tilemap.GetCellCenterWorld(tilePos);
         transform.position = centerPos;
+        isMoveEnd = true;
     }
 
     private Vector3 ConvertTileToWorldPos(Vector3Int tilePos) //タイル座標をワールド座標に変換する処理を行うメソッド

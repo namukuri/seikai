@@ -24,32 +24,23 @@ public class PlacementCommandPopUp : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        if (!hideCommandButtons)
-        {
-            // UnitManager が保持している選択中の WarShip が null でなければ表示、null なら非表示
-            if (unitManager != null && unitManager.selectWarShip != null)
-            {
-                commandButtonsCanvasGroup.alpha = 1f;
-            }
-            else
-            {
-                commandButtonsCanvasGroup.alpha = 0f;
-            }
-        }
-        else
-        {
-            // hideCommandButtons が true の場合は常に非表示にする
-            commandButtonsCanvasGroup.alpha = 0f;
-        }
-    }
     /// <summary>
-    /// 外部から呼び出して、移動ボタン等を非表示にする
+    /// 移動ボタンを押した際など、外部から呼び出して
+    /// 移動ボタン・戻るボタンを非表示にする
     /// </summary>
     public void HideCommandButtons()
     {
-        hideCommandButtons = true;
-        commandButtonsCanvasGroup.alpha -= 0f;
+        commandButtonsCanvasGroup.alpha = 0f;
     }
+
+    /// <summary>
+    /// 移動処理完了後など、外部から呼び出して
+    /// 移動ボタン・戻るボタンを表示する
+    /// </summary>
+    public void ShowCommandButtons()
+    {
+        commandButtonsCanvasGroup.alpha = 1f;
+    }
+
+    
 }

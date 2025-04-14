@@ -18,6 +18,9 @@ public class CursorController : MonoBehaviour
     // UnitManager への参照
     public UnitManager unitManager;
     public GameManager gameManager;
+    [SerializeField]
+    public PlacementCommandPopUp placementcommandPopUp;
+    public CommandButtonManager commandbuttonManager;
     void Start()
     {
         // Rigidbody2Dコンポーネントを取得
@@ -49,7 +52,16 @@ public class CursorController : MonoBehaviour
                     bool isSelectWarship = unitManager.SelectWarShipAtCell(cellPos);
                     if (isSelectWarship)
                     {
+                        if (unitManager.selectWarShip.isMoveEnd == true)
+                        {
+                            commandbuttonManager.HideMoveBtn();
+                        }
+                        else
+                        {
+                            commandbuttonManager.ShowMoveBtn();
+                        }
                         gameManager.ChangeCurrentGamePhase(GamePhase.SelectingUnit);
+                        placementcommandPopUp.ShowCommandButtons(); 
                     }
                 }
             }
@@ -77,6 +89,7 @@ public class CursorController : MonoBehaviour
                                 var warship = unitManager.selectWarShip;
                                 warship.MoveTo(cellPos);
                                 warship.mapManager.HideRoute();
+                                //placementcommandPopUp.ShowCommandButtons();
 
                                 // 次のフェイズへ、またはフェイズを戻す
                                 gameManager.ChangeCurrentGamePhase(GamePhase.MoveCurrsor);
