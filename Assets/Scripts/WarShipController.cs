@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WarShipController : MonoBehaviour
 {
@@ -18,6 +19,23 @@ public class WarShipController : MonoBehaviour
     public MapManager mapManager;
     public bool isMoveEnd;
 
+    [Header("方向選択UI")]
+    [SerializeField]
+    private GameObject directionsButtonsObj; // Canvas→DirectionsButtons
+    [SerializeField]
+    private Button btnUp;
+    [SerializeField]
+    private Button btnDown;
+    [SerializeField]
+    private Button btnLeft;
+    [SerializeField]
+    private Button btnRight;
+
+    [Header("ゲーム管理")]
+    [SerializeField]
+    private　GameManager gameManager; // フェイズ切り替え用
+
+
     void Start()
     {
         isMoveEnd = false;
@@ -32,6 +50,13 @@ public class WarShipController : MonoBehaviour
             // 必要であれば、warshipData の情報を利用して初期化などを行う
             Debug.Log("WarShipDataを取得: " + warshipData.warshipName);
         }
+        //ゲーム開始時は 方向ボタンを隠す
+        directionsButtonsObj.SetActive(false);
+        //各方向ボタンが押されたときのリスナー登録
+        btnUp.onClick.AddListener(() => OnDirectionClicked(Vector3.up));
+        btnRight.onClick.AddListener(() => OnDirectionClicked(Vector3.right));
+        btnDown.onClick.AddListener(() => OnDirectionClicked(Vector3.down));
+        btnLeft.onClick.AddListener(() => OnDirectionClicked(Vector3.left));
     }
 
     // ユーザ入力やコマンドで tempTargetPos を更新した後に呼び出す経路計算メソッド
@@ -70,14 +95,36 @@ public class WarShipController : MonoBehaviour
         return route;
     }
 
+    // 移動が完了した後に呼ぶメソッド
+    public void EnableDirectionSelection()
+    {
+        // フェイズを SelectingDirection に切り替え
+        gameManager.ChangeCurrentGamePhase(GamePhase.SelectingDirection);
+        // 矢印ボタンを表示
+        directionsButtonsObj.SetActive(true);
+    }
+
+    // ボタンを押したときの処理
+    private void OnDirectionClicked(Vector3 dir)
+    {
+        //回転処理
+        SetDirection(dir);
+
+        //方向ボタンを隠して、フェイズを戻す
+        directionsButtonsObj.SetActive(false);
+        gameManager.ChangeCurrentGamePhase(GamePhase.MoveCurrsor);
+    }
+
     // 方向を決める
-    public void SetDirection(Vector2 dir)
+    public void SetDirection(Vector3 dir)
     {
         if (dir.sqrMagnitude > 0.01f) //（ベクトルの長さの2乗）が 0.01 よりも大きいかどうかをチェック
         {
             direction = dir.normalized;　//ベクトルの向きはそのままで大きさを 1 にする
-            float angle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg; //Mathf.Atan2(direction.y, direction.x) で direction の角度（ラジアン）を求め
-                                                                                 // * Mathf.Rad2Deg でその値を度に変換 結果が、変数 angle に代入される
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg
+                -90f; //右向きが0度になっているので、ここで 90 度引く
+            //Mathf.Atan2(direction.y, direction.x) で direction の角度（ラジアン）を求め
+            // * Mathf.Rad2Deg でその値を度に変換 結果が、変数 angle に代入される
             transform.rotation = Quaternion.Euler(0, 0, angle); //指定した Euler 角（ここでは X:0, Y:0, Z:angle）をもとに、クォータニオン（回転情報）を生成
         }
         
@@ -106,19 +153,19 @@ public class WarShipController : MonoBehaviour
         // キーボードの上下左右の入力に応じて回転させる
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            SetDirection(Vector2.up);
+            SetDirection(Vector3.up);
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            SetDirection(Vector2.down);
+            SetDirection(Vector3.down);
         }
         else if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            SetDirection(Vector2.right);
+            SetDirection(Vector3.left);
         }
         else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            SetDirection(Vector2.left);
+            SetDirection(Vector3.right);
         }
     }
     

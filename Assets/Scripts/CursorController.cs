@@ -73,36 +73,21 @@ public class CursorController : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 // クリックされたセルがタイルとして存在しているか確認
-                if (tilemap.HasTile(cellPos)) 
+                if (tilemap.HasTile(cellPos)
+                    && unitManager.selectWarShip != null
+                    && unitManager.selectWarShip.mapManager.IsCellHiglighted(cellPos)) 
                 {
-                    if(unitManager != null && unitManager.selectWarShip != null)
-                    {
-                        if(unitManager.selectWarShip.mapManager.IsCellHiglighted(cellPos)) 
-                        {
-                            // ここで MapManager 側でハイライト済みセルを判定するメソッド IsCellHighlighted() が正しく実装されている前提
-                            if (unitManager.selectWarShip.mapManager.IsCellHiglighted(cellPos))
-                            {
-                                // フェイズを SelectingMoveTile に変更
-                                gameManager.ChangeCurrentGamePhase(GamePhase.SelectingMoveTile);
+                    var warship = unitManager.selectWarShip;
 
-                                // 移動先として処理する
-                                var warship = unitManager.selectWarShip;
-                                warship.MoveTo(cellPos);
-                                warship.mapManager.HideRoute();
-                                //placementcommandPopUp.ShowCommandButtons();
+                    warship.MoveTo(cellPos);
+                    warship.mapManager.HideRoute();
 
-                                // 次のフェイズへ、またはフェイズを戻す
-                                gameManager.ChangeCurrentGamePhase(GamePhase.MoveCurrsor);
-                            }
-                        }                                                
-                           
-                        else
-                        {
-                            Debug.Log("このセルは移動可能範囲外です");
-                        }
-                    }
+                    //移動完了→方向選択UIを出す
+                    warship.EnableDirectionSelection();
                 }
-            }
+
+            }                                                
+                        
         }
     }
 }
