@@ -9,6 +9,9 @@ public class WarShipController : MonoBehaviour
     public Vector3Int currentPos; //2次元マップのマス座標の現在の位置
     public Vector3Int tempTargetPos; // 一時的に選んだ移動先
     public Vector3 direction; // 艦の向き
+
+    public Vector3 prevDirection; // 方向選択前の向きベクトルを保存
+    public Quaternion prevRotation; // 方向選択前の回転情報を保存
     public int warshipNo;
     [SerializeField]
     public WarshipData warshipData;
@@ -31,7 +34,7 @@ public class WarShipController : MonoBehaviour
     [SerializeField]
     private Button btnRight;
 
-    public Vector3Int prewPos; //移動前の座標
+    public Vector3Int prevPos; //移動前の座標
 
     [Header("ゲーム管理")]
     [SerializeField]
@@ -104,6 +107,9 @@ public class WarShipController : MonoBehaviour
     // 移動が完了した後に呼ぶメソッド
     public void EnableDirectionSelection()
     {
+        //元の方向を保存しておく
+        prevDirection = direction;
+        prevRotation = transform.rotation;
         // フェイズを SelectingDirection に切り替え
         gameManager.ChangeCurrentGamePhase(GamePhase.SelectingDirection);
         // 矢印ボタンを表示
@@ -147,7 +153,7 @@ public class WarShipController : MonoBehaviour
     {
         Vector3 tempPos = transform.position;
         Vector3Int gridPos = new Vector3Int((int)tempPos.x, (int)tempPos.y, 0);
-        prewPos = gridPos;
+        prevPos = gridPos;
         currentPos = tilePos; //新しいタイルの座標を現在の位置に反映
         // タイルの中心のワールド座標を取得し、そこへ移動
         Vector3 centerPos = mapManager.tilemap.GetCellCenterWorld(tilePos);
@@ -158,9 +164,13 @@ public class WarShipController : MonoBehaviour
 
     public void MoveCancel(UnitManager unitManager)
     {
-        transform.position = prewPos;
+        transform.position = prevPos;
         isMoveEnd = false;
-        unitManager.selectWarShip = null;
+
+        // ③ 向きベクトルと回転を元に戻す
+        direction = prevDirection;
+        transform.rotation = prevRotation;
+        //unitManager.selectWarShip = null;
     }
 
 
