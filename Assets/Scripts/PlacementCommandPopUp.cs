@@ -18,9 +18,10 @@ public class PlacementCommandPopUp : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // ゲーム開始時は非表示にしておく
-        commandButtonsCanvasGroup.alpha = 0f;
 
+        // ゲーム開始時は非表示にしておく
+        HideCommandButtons();
+        
     }
 
     // Update is called once per frame
@@ -31,6 +32,7 @@ public class PlacementCommandPopUp : MonoBehaviour
     public void HideCommandButtons()
     {
         commandButtonsCanvasGroup.alpha = 0f;
+        commandButtonsCanvasGroup.blocksRaycasts = false;
     }
 
     /// <summary>
@@ -40,6 +42,7 @@ public class PlacementCommandPopUp : MonoBehaviour
     public void ShowCommandButtons()
     {
         commandButtonsCanvasGroup.alpha = 1f;
+        commandButtonsCanvasGroup.blocksRaycasts = true;
     }
 
     

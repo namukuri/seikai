@@ -18,7 +18,7 @@ public class UnitManager : MonoBehaviour
     public bool SelectWarShipAtCell(Vector3Int cellPos)
     {
         // いったん選択を解除
-        selectWarShip = null;
+        //selectWarShip = null;
 
         // warshipList に含まれるすべての艦隊をチェック
         foreach (var warship in warshipList)

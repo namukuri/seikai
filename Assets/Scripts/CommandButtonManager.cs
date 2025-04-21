@@ -7,7 +7,7 @@ public class CommandButtonManager : MonoBehaviour
     [SerializeField]
     private Button btnMove;
     [SerializeField]
-    private Button btnEscape;
+    private Button btnEscape, btnCancel;
     public GameManager gameManager;
     public UnitManager unitManager;    // UnitManager 参照
     public MapManager mapManager;      // MapManager 参照
@@ -22,6 +22,8 @@ public class CommandButtonManager : MonoBehaviour
 
         // Escape ボタンのクリック処理を登録
         btnEscape.onClick.AddListener(OnClickEscapeBtn);
+
+        btnCancel.onClick.AddListener(OnClickCancelBtn);
 
     }
 
@@ -64,6 +66,13 @@ public class CommandButtonManager : MonoBehaviour
         gameManager.ChangeCurrentGamePhase(GamePhase.MoveCurrsor);
         // ボタンを消したいので、選択中の艦を null にしておく
         unitManager.selectWarShip = null;
+    }
+
+    private void OnClickCancelBtn()
+    {
+        Debug.Log("unitmanager" + unitManager);
+        Debug.Log("selectWarShip" +unitManager.selectWarShip);
+        unitManager.selectWarShip.MoveCancel(unitManager);
     }
 
     public void ShowMoveBtn()

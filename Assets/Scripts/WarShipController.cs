@@ -31,6 +31,8 @@ public class WarShipController : MonoBehaviour
     [SerializeField]
     private Button btnRight;
 
+    public Vector3Int prewPos; //移動前の座標
+
     [Header("ゲーム管理")]
     [SerializeField]
     private　GameManager gameManager; // フェイズ切り替え用
@@ -131,14 +133,26 @@ public class WarShipController : MonoBehaviour
     }
 
     // 実際に移動する処理
-    public void MoveTo(Vector3Int tilePos)
+    public void MoveTo(Vector3Int tilePos, UnitManager unitManager)
     {
+        Vector3 tempPos = transform.position;
+        Vector3Int gridPos = new Vector3Int((int)tempPos.x, (int)tempPos.y, 0);
+        prewPos = gridPos;
         currentPos = tilePos; //新しいタイルの座標を現在の位置に反映
         // タイルの中心のワールド座標を取得し、そこへ移動
         Vector3 centerPos = mapManager.tilemap.GetCellCenterWorld(tilePos);
         transform.position = centerPos;
         isMoveEnd = true;
+        unitManager.selectWarShip = null;
     }
+
+    public void MoveCancel(UnitManager unitManager)
+    {
+        transform.position = prewPos;
+        isMoveEnd = false;
+        unitManager.selectWarShip = null;
+    }
+
 
     private Vector3 ConvertTileToWorldPos(Vector3Int tilePos) //タイル座標をワールド座標に変換する処理を行うメソッド
     {

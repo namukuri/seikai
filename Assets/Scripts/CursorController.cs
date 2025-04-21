@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.Tilemaps; //Tilemapを扱うために必要
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -21,6 +22,8 @@ public class CursorController : MonoBehaviour
     [SerializeField]
     public PlacementCommandPopUp placementcommandPopUp;
     public CommandButtonManager commandbuttonManager;
+    private Vector3 offset = new Vector3(0.5f, 0.5f, 0);
+
     void Start()
     {
         // Rigidbody2Dコンポーネントを取得
@@ -30,8 +33,12 @@ public class CursorController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(EventSystem.current.IsPointerOverGameObject())
+        {
+            return;
+        }
         // 常にカーソルの位置を更新する
-        Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition + offset);
         mouseWorldPos.z = 0f;
         Vector3Int cellPos = tilemap.WorldToCell(mouseWorldPos);
         transform.position = tilemap.GetCellCenterWorld(cellPos);
@@ -79,7 +86,7 @@ public class CursorController : MonoBehaviour
                 {
                     var warship = unitManager.selectWarShip;
 
-                    warship.MoveTo(cellPos);
+                    warship.MoveTo(cellPos, unitManager);
                     warship.mapManager.HideRoute();
 
                     //移動完了→方向選択UIを出す
