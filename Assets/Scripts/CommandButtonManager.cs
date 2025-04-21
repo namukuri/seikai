@@ -24,7 +24,23 @@ public class CommandButtonManager : MonoBehaviour
         btnEscape.onClick.AddListener(OnClickEscapeBtn);
 
         btnCancel.onClick.AddListener(OnClickCancelBtn);
+        // 最初はCancelを隠しておく
+        HideCancelBtn();
 
+    }
+
+    /// <summary>Cancelボタンを隠してクリック不可にする</summary>
+    public void HideCancelBtn()
+    {
+        btnCancel.gameObject.SetActive(false);
+        btnCancel.interactable = false;
+    }
+
+    /// <summary>Cancelボタンを再表示してクリック可能にする</summary>
+    public void ShowCancelBtn()
+    {
+        btnCancel.gameObject.SetActive(true);
+        btnCancel.interactable = true;
     }
 
     private void OnClickMoveBtn()
@@ -43,7 +59,7 @@ public class CommandButtonManager : MonoBehaviour
         // 移動可能範囲を BFS などで計算
         //   ここでは「warship.currentPos から warship.warshipData.movePower タイル分」
         List<Vector3Int> moveRange = pathFinder.CalculateRoute
-            ( 
+            (
             startPos,
             warship.warshipData.movePower
             );
@@ -51,7 +67,7 @@ public class CommandButtonManager : MonoBehaviour
         // タイルマップ上で移動可能範囲をハイライト
         mapManager.ShowRoute(moveRange);
 
-        placementCommandPopUp.HideCommandButtons(); 
+        placementCommandPopUp.HideCommandButtons();
 
         //ゲームフェイズをShowingMoveRangeに切り替える
         gameManager.ChangeCurrentGamePhase(GamePhase.ShowingMoveRange);
@@ -70,17 +86,67 @@ public class CommandButtonManager : MonoBehaviour
 
     private void OnClickCancelBtn()
     {
+        Debug.Log("Cancel clicked");
         Debug.Log("unitmanager" + unitManager);
-        Debug.Log("selectWarShip" +unitManager.selectWarShip);
-        unitManager.selectWarShip.MoveCancel(unitManager);
+        Debug.Log("selectWarShip" + unitManager.selectWarShip);
+
+        // WarShipController を取り出す
+        var warship = unitManager.selectWarShip;
+        if (warship == null)
+        {
+            return;
+        }
+
+        // 「移動先を決めたあとのキャンセル」も拾う
+        if (warship.isMoveEnd)
+        {
+            //元のマスに戻す
+            warship.MoveCancel(unitManager);
+            //もし矢印UIが出ていれば隠す
+            warship.DisableDirectionSelection();
+            // ３）コマンドUIを再表示
+            placementCommandPopUp.ShowCommandButtons();
+            ShowMoveBtn();
+            // ４）Cancelは隠す
+            HideCancelBtn();
+            //フェイズをコマンド選択（SelectingUnit）に戻す
+            gameManager.ChangeCurrentGamePhase(GamePhase.SelectingUnit);
+        }
+
+            // 「いま方向選択中」かどうかで分岐
+            if (gameManager.currentGamePhase == GamePhase.SelectingDirection)
+        {
+            //移動と矢印UIを取り消す
+            warship.MoveCancel(unitManager); //// 元のマスに戻す
+            warship.DisableDirectionSelection(); //矢印UIを隠す
+
+            //コマンドボタン（移動／戻る）を再表示
+            placementCommandPopUp.ShowCommandButtons();
+            ShowMoveBtn(); // 移動ボタンを出す
+            //ShowEscapeBtn();
+
+            // Cancel は隠す
+            HideCancelBtn();
+
+            //フェイズを元に戻す
+            gameManager.ChangeCurrentGamePhase(GamePhase.SelectingUnit);
+        }
+        else
+        {
+            // （もし他のフェイズで Cancel 動作があるならここに書く）
+        }
     }
 
     public void ShowMoveBtn()
     {
         btnMove.interactable = true;
+        btnMove.gameObject.SetActive(true);
     }
     public void HideMoveBtn()
     {
         btnMove.interactable = false;
+        btnMove.gameObject.SetActive(false);
     }
 }
+
+    

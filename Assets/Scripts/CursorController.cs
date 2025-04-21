@@ -59,7 +59,10 @@ public class CursorController : MonoBehaviour
                     bool isSelectWarship = unitManager.SelectWarShipAtCell(cellPos);
                     if (isSelectWarship)
                     {
-                        if (unitManager.selectWarShip.isMoveEnd == true)
+                        //Cancel は隠す
+                        commandbuttonManager.HideCancelBtn();
+                        //WarShip がまだ移動済みなら Move ボタンを隠す、そうでなければ出す
+                        if (unitManager.selectWarShip.isMoveEnd)
                         {
                             commandbuttonManager.HideMoveBtn();
                         }
@@ -91,6 +94,14 @@ public class CursorController : MonoBehaviour
 
                     //移動完了→方向選択UIを出す
                     warship.EnableDirectionSelection();
+
+                    //親のコマンド群を再表示
+                    placementcommandPopUp.ShowCommandButtons();
+
+                    //ここで Cancel ボタンを再表示＆活性化する
+                    commandbuttonManager.ShowCancelBtn();
+                    commandbuttonManager.HideMoveBtn();
+                    //commandbuttonManager.HideEscapeBtn();
                 }
 
             }                                                

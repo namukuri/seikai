@@ -3744,7 +3744,9 @@ MonoBehaviour:
   btnDown: {fileID: 2117180798}
   btnLeft: {fileID: 1053170198}
   btnRight: {fileID: 1149085472}
+  prewPos: {x: 0, y: 0, z: 0}
   gameManager: {fileID: 1394581460}
+  unitManager: {fileID: 446168935}
 --- !u!1 &348406945
 GameObject:
   m_ObjectHideFlags: 0

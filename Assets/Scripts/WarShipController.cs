@@ -37,6 +37,10 @@ public class WarShipController : MonoBehaviour
     [SerializeField]
     private　GameManager gameManager; // フェイズ切り替え用
 
+    [Header("UnitManagerへの参照")]
+    [SerializeField]
+    private UnitManager unitManager;
+
 
     void Start()
     {
@@ -106,15 +110,21 @@ public class WarShipController : MonoBehaviour
         directionsButtonsObj.SetActive(true);
     }
 
+    // 方向選択画面をキャンセルするときに呼ぶ
+    public void DisableDirectionSelection()
+    {
+        directionsButtonsObj.SetActive(false);
+    }
+    
+
+
     // ボタンを押したときの処理
     private void OnDirectionClicked(Vector3 dir)
     {
         //回転処理
         SetDirection(dir);
+        directionsButtonsObj.SetActive(false); //矢印UIだけ閉じる
 
-        //方向ボタンを隠して、フェイズを戻す
-        directionsButtonsObj.SetActive(false);
-        gameManager.ChangeCurrentGamePhase(GamePhase.MoveCurrsor);
     }
 
     // 方向を決める
@@ -143,7 +153,7 @@ public class WarShipController : MonoBehaviour
         Vector3 centerPos = mapManager.tilemap.GetCellCenterWorld(tilePos);
         transform.position = centerPos;
         isMoveEnd = true;
-        unitManager.selectWarShip = null;
+        //unitManager.selectWarShip = null;
     }
 
     public void MoveCancel(UnitManager unitManager)
